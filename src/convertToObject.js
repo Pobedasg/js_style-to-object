@@ -11,9 +11,18 @@ function convertToObject(sourceString) {
     .map((cssRule) => cssRule.trim())
     .filter((trimmedRule) => trimmedRule !== '')
     .reduce((cssObject, trimmedRule) => {
-      const [property, value] = trimmedRule.split(':');
+      const ruleParts = trimmedRule.split(':');
 
-      cssObject[property.trim(' ')] = value.trim(' ');
+      if (ruleParts.length !== 2) {
+        return cssObject;
+      }
+
+      const property = ruleParts[0].trim();
+      const value = ruleParts[1].trim();
+
+      if (property && value) {
+        cssObject[property] = value;
+      }
 
       return cssObject;
     }, {});
