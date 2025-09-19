@@ -10,12 +10,12 @@ function convertToObject(sourceString) {
     .split(';')
     .map((cssRule) => cssRule.trim())
     .filter((trimmedRule) => trimmedRule !== '')
-    .reduce((acumulator, trimmedRule) => {
+    .reduce((cssObject, trimmedRule) => {
       const ruleParts = trimmedRule.split(':');
 
-      acumulator[ruleParts[0].trim(' ')] = ruleParts[1].trim(' ');
+      cssObject[ruleParts[0].trim(' ')] = ruleParts[1].trim(' ');
 
-      return acumulator;
+      return cssObject;
     }, {});
 }
 
